@@ -31,6 +31,49 @@
             </div>
             
         </div>
-</main>
+    </main>
+    <div class="project-form">
+        <form>
+            <label for="project">Enter Project Name</label>
+            <input type="text" id="project" class="project-input">
+
+            <button class="project-submit" type="button">Submit</button>
+            <button class="project-exit" type="button">Exit</button>
+        </form>
+    </div>
+    <div class="list-form">
+        <form>
+            <div class="list-row">
+                <label for="list-title">Title</label>
+                <input type="text" id="list-title" name="list-title">
+            </div>
+
+            <div class="list-row">
+                <label for="list-description">Description</label>
+                <textarea name="list-description" id="list-description" cols="30" rows="10">Enter description here</textarea>
+            </div>
+
+            <div class="list-row">
+                <label for="list-date">Date</label>
+                <input type="date" id="list-date" name="list-row">
+            </div>
+
+            <div class="list-row">
+                <p>Priority</p>
+                    <label for="list-priority-low">Low</label>
+                    <input type="radio" id="list-priority-low" name="list-priority">
+
+                    <label for="list-priority-medium">Medium</label>
+                    <input type="radio" id="list-priority-medium" name="list-priority">
+
+                    <label for="list-priority-high">High</label>
+                    <input type="radio" id="list-priority-high" name="list-priority">  
+            </div>
+            <div class="list-row-button">
+                <button class="list-submit" type="button">Submit</button>
+                <button class="list-exit" type="button">Exit</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

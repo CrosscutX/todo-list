@@ -9,7 +9,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
 }
 
 body{
@@ -72,14 +71,14 @@ main{
 }
 
 .project-column button{
-    background-color: #2C7CB0;
+    background-color: #ba5312;
     border: 1px solid #A5DCE4;
     height: 40px;
     width: 150px;
 }
 
 .list-column button{
-    background-color: #2C7CB0;
+    background-color: #ba5312;
     border: 1px solid #A5DCE4;
     height: 40px;
     width: 150px;
@@ -88,7 +87,83 @@ main{
 .project-box{
     width: 80%;
     height: 600px;
+    background-color: #ba5312;
+    border: 1px solid #A5DCE4;
+}
+    /*The project form that pops up when I click the new project button.
+    It starts not displayed and then centers on the body tag.*/
+.project-form{
+    visibility: hidden;
+    display: flex;
+    text-align: center;
+    align-items: flex-start;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 150px;
+    background-color: #ba5312;
+    border: 5px solid #A5DCE4;
+}
+
+.project-form input{
     background-color: #2C7CB0;
     border: 1px solid #A5DCE4;
+    margin-top: 10px;
+}
+
+.project-form button{
+    margin-top: 15px;
+    height: 50px;
+    width: 75px;
+}
+
+.project-submit{
+    background-color: #398557;
+}
+
+.project-exit{
+    background-color: rgb(200, 36, 36);
+}
+
+.list-form{
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:#ba5312;
+    border: 5px solid #A5DCE4;
+    height: 600px;
+    width: 500px;
+}
+
+.list-row{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-row p{
+    margin-bottom: 15px;
+}
+
+.list-row-button button{
+    margin-top: 15px;
+    height: 50px;
+    width: 75px;
+}
+
+.list-submit{
+    background-color: #398557;
+}
+
+.list-exit{
+    background-color: rgb(200, 36, 36);
 }
 

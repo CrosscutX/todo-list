@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <script src="./bundle.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="./bundle.js" defer></script>
     <title>Todo list</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
             <div class="project-header">
                 <h2>Projects</h2>
             </div>
-            <button>New Project</button>
+            <button type="button" id="projBtn" class="new-project-btn">New Project</button>
             <div class="project-box">
 
             </div>
@@ -27,9 +28,17 @@
         <div class="list-column">
             <div class="list-header">
                 <h2>List</h2>
-                <button>Add Task</button>
+                <button type="button" id="listBtn" class="add-task-btn">Add Task</button>
             </div>
-            
+            <div class="list-body">
+                <div class="todo-item">
+                    <h2>Title</h2>
+                    <p>5/6/12</p>
+                    <span class="material-symbols-outlined">
+                        delete
+                        </span>
+                </div>
+            </div>
         </div>
     </main>
     <div class="project-form">

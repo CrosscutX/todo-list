@@ -5,6 +5,15 @@
 .border { color: #A5DCE4 }
 
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -68,6 +77,7 @@ main{
     font-size: 2rem;
     display: flex;
     justify-content: center;
+    margin-bottom: 15px;
 }
 
 .project-column button{
@@ -90,6 +100,27 @@ main{
     background-color: #ba5312;
     border: 1px solid #A5DCE4;
 }
+
+    /*Body to hold containers for todos*/
+    .list-body{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 15px;
+    }
+
+    /*todo elements that are added to the body of the list*/
+    .todo-item{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        background-color: #ba5312;
+        border: 1px solid #A5DCE4;
+        height: 85px;
+        width: 25%;
+        margin-bottom: 15px;
+    }
     /*The project form that pops up when I click the new project button.
     It starts not displayed and then centers on the body tag.*/
 .project-form{

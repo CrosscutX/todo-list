@@ -124,7 +124,7 @@ main{
     /*The project form that pops up when I click the new project button.
     It starts not displayed and then centers on the body tag.*/
 .project-form{
-    visibility: hidden;
+    visibility: show;
     display: flex;
     text-align: center;
     align-items: flex-start;

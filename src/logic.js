@@ -8,3 +8,4 @@ export function Todo(title, description, date, priority) {
     this.date = date;
     this.priority = priority;
 }
+

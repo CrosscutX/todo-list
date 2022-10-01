@@ -1,8 +1,8 @@
 import Project, {Todo} from './logic';
 import './style.css';
 
-let projItems = document.querySelector('.project-item');
-console.log(projItems);
+let projItems = document.querySelectorAll('.project-item');
+
 let projArr = [];
 
 const projBtn = document.getElementById('projBtn');
@@ -11,29 +11,22 @@ const projSubBtn = document.querySelector('.project-submit');
 const projExitBtn = document.querySelector('.project-exit');
  //Project button click handlers
 function clickEvents() {
-
-    projItems.addEventListener('click', function(){
-        console.log('FUCK');
-    })
-
+    
     projBtn.addEventListener('click', function(){
         projForm.style.visibility = 'visible';
     });
     //Array to hold all of my project objects
-    
     
     projSubBtn.addEventListener('click', function(){
         const projTitleText = document.querySelector('.project-input').value;
         let newProject = new Project(projTitleText);
        
         projArr.push(newProject);
-        console.log(projArr);
        
         appendProject();
         projForm.style.visibility = 'hidden';
         //reselect all project items for click events;
-        projItems = document.querySelectorAll('.project-item');
-        console.log(projItems);
+        reselectProjects();
     })
 
     projExitBtn.addEventListener('click', function(){
@@ -57,12 +50,27 @@ function clickEvents() {
         listForm.style.visibility = 'hidden';
     })
     
+
+}
+
+
+
+function reselectProjects() {
+    projItems = document.querySelectorAll('.project-item');
+    console.log(projItems);
+    
+    projItems.forEach(function(elements){
+        elements.addEventListener('click', function(){
+            console.log('ahhhhhhhhhhhhh');
+        });
+    });
+   
+    console.log(projItems);
 }
 //The functionality of appending elements to the project box.
 function appendProject() {
     //Selects the project box
     const box = document.querySelector('.project-box');
-    console.log(box);
     //Creates a new div and h2 element to insert into the project box.
     const projItem = document.createElement('div');
     const projTitle = document.createElement('h2');
@@ -79,9 +87,5 @@ function appendProject() {
 }
 
 clickEvents();
-
-
-    
-
 
 

@@ -1,8 +1,8 @@
 import Project, {Todo} from './logic';
 import './style.css';
 
-let projItems = document.querySelectorAll('.project-item');
-
+let projItems = document.getElementsByClassName('project-item');
+console.log(projItems);
 let projArr = [];
 
 const projBtn = document.getElementById('projBtn');
@@ -10,7 +10,7 @@ const projForm = document.querySelector('.project-form');
 const projSubBtn = document.querySelector('.project-submit');
 const projExitBtn = document.querySelector('.project-exit');
  //Project button click handlers
-function clickEvents() {
+(function clickEvents() {
     
     projBtn.addEventListener('click', function(){
         projForm.style.visibility = 'visible';
@@ -50,21 +50,20 @@ function clickEvents() {
         listForm.style.visibility = 'hidden';
     })
     
-
-}
+})();
 
 
 
 function reselectProjects() {
-    projItems = document.querySelectorAll('.project-item');
-    console.log(projItems);
-    
-    projItems.forEach(function(elements){
-        elements.addEventListener('click', function(){
-            console.log('ahhhhhhhhhhhhh');
-        });
-    });
-   
+    projItems = document.getElementsByClassName('project-item');
+    //remove event listener from all items to avoid stacking.
+    for(let i = 0; i < projItems.length; i++) {
+        projItems[i].removeEventListener('click', printStuff);
+    }
+    //add event listeners back so they all buttons are clickable.
+    for(let i = 0; i < projItems.length; i++) {
+        projItems[i].addEventListener('click', printStuff)
+       }
     console.log(projItems);
 }
 //The functionality of appending elements to the project box.
@@ -86,6 +85,10 @@ function appendProject() {
 
 }
 
-clickEvents();
+function printStuff(){
+    console.log('AHHHHHHHHHHHHH');
+}
+
+
 
 

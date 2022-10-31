@@ -24,11 +24,6 @@ const projExitBtn = document.querySelector('.project-exit');
     });
      
     projSubBtn.addEventListener('click', function(){
-        const projTitleText = document.querySelector('.project-input').value;
-        let newProject = new Project(projTitleText);
-       
-        projArr.push(newProject);
-       
         appendProject();
         projForm.style.visibility = 'hidden';
         reselectProjects();
@@ -86,8 +81,10 @@ function appendProject() {
    //appending
     projItem.appendChild(projTitle);
     box.appendChild(projItem);
-    //Store 
-
+    //Increment ID variable and store project in array
+    idCounter++
+    console.log(idCounter);
+    storeProj(idCounter, projTitleText);
 }
 //This function is needed so I can remove click events whenever a new project is added.
 function displayTodos(){
@@ -96,6 +93,7 @@ function displayTodos(){
 }
 
 function storeProj(id, name){
+    console.log(id);
     const newProj = new Project(id, name);
     projArr.push(newProj);
     console.log(projArr);

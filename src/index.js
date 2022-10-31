@@ -1,9 +1,16 @@
+'use strict'
 import Project, {Todo} from './logic';
 import './style.css';
 
 let projItems = document.getElementsByClassName('project-item');
 reselectProjects();
+//Array to hold all of my project objects
 let projArr = [];
+storeProj(0, 'Default Project');
+//Storing IDs to keep track of selected project.
+let currentID = 0;
+let idCounter = 0;
+//Store the first project in the 
 
 const projBtn = document.getElementById('projBtn');
 const projForm = document.querySelector('.project-form');
@@ -15,8 +22,7 @@ const projExitBtn = document.querySelector('.project-exit');
     projBtn.addEventListener('click', function(){
         projForm.style.visibility = 'visible';
     });
-    //Array to hold all of my project objects
-    
+     
     projSubBtn.addEventListener('click', function(){
         const projTitleText = document.querySelector('.project-input').value;
         let newProject = new Project(projTitleText);
@@ -25,7 +31,6 @@ const projExitBtn = document.querySelector('.project-exit');
        
         appendProject();
         projForm.style.visibility = 'hidden';
-        //reselect all project items for click events;
         reselectProjects();
     })
 
@@ -53,16 +58,15 @@ const projExitBtn = document.querySelector('.project-exit');
 })();
 
 
-
 function reselectProjects() {
     projItems = document.getElementsByClassName('project-item');
     //remove event listener from all items to avoid stacking.
     for(let i = 0; i < projItems.length; i++) {
-        projItems[i].removeEventListener('click', printStuff);
+        projItems[i].removeEventListener('click', displayTodos);
     }
     //add event listeners back so they all buttons are clickable.
     for(let i = 0; i < projItems.length; i++) {
-        projItems[i].addEventListener('click', printStuff)
+        projItems[i].addEventListener('click', displayTodos)
        }
     console.log(projItems);
 }
@@ -75,18 +79,26 @@ function appendProject() {
     const projTitle = document.createElement('h2');
     const projTitleText = document.querySelector('.project-input').value;
     //Adds the class to the item for styling purposes and adds the title defined in the click event to 
-    //projTitle. Also adds the data attribute to be the title, for later use.
+    //projTitle. Also adds the data attribute to be the title, for later use in identifying buttons.
     projItem.classList.add('project-item');
     projItem.setAttribute('data', projTitleText);
     projTitle.textContent = projTitleText;
    //appending
     projItem.appendChild(projTitle);
     box.appendChild(projItem);
+    //Store 
 
 }
-
-function printStuff(){
+//This function is needed so I can remove click events whenever a new project is added.
+function displayTodos(){
     console.log('AHHHHHHHHHHHHH');
+    
+}
+
+function storeProj(id, name){
+    const newProj = new Project(id, name);
+    projArr.push(newProj);
+    console.log(projArr);
 }
 
 

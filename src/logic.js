@@ -1,8 +1,10 @@
-export default function Project(title) {
+export default function Project(id, title) {
+    this.id = id;
     this.title = title;
 }
 
-export function Todo(title, description, date, priority) {
+export function Todo(id, title, description, date, priority) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.date = date;

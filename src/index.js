@@ -91,8 +91,19 @@ function appendProject() {
 //This function is needed so I can remove click events whenever a new project is added.
 //The function itself should make the proper todo's visible.
 function displayTodos(e){
-    let currentProject = e.target;
-    let currentData = currentProject.getAttribute('data');
+    const currentProject = e.target;
+    const todos = document.querySelectorAll('.todo-item')
+    currentID = currentProject.getAttribute('data')
+    
+    todos.forEach(element => {
+        if(element.getAttribute('data') !== currentID){
+            element.style.visibility = 'hidden';
+        } else{
+            element.style.visibility = 'visible'
+        }
+    });
+    
+    console.log(currentProject);
 }
 
 function storeProj(id, name){

@@ -2,7 +2,7 @@ import Project, {Todo} from './logic';
 import './style.css';
 
 let projItems = document.getElementsByClassName('project-item');
-console.log(projItems);
+reselectProjects();
 let projArr = [];
 
 const projBtn = document.getElementById('projBtn');

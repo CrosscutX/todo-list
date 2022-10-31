@@ -1,4 +1,5 @@
 'use strict'
+import { data } from 'browserslist';
 import Project, {Todo} from './logic';
 import './style.css';
 
@@ -10,23 +11,24 @@ storeProj(0, 'Default Project');
 //Storing IDs to keep track of selected project.
 let currentID = 0;
 let idCounter = 0;
-//Store the first project in the 
 
-const projBtn = document.getElementById('projBtn');
-const projForm = document.querySelector('.project-form');
-const projSubBtn = document.querySelector('.project-submit');
-const projExitBtn = document.querySelector('.project-exit');
+
  //Project button click handlers
 (function clickEvents() {
-    
+    //Proj button click handlers
+    const projBtn = document.getElementById('projBtn');
+    const projForm = document.querySelector('.project-form');
+    const projSubBtn = document.querySelector('.project-submit');
+    const projExitBtn = document.querySelector('.project-exit');
+
     projBtn.addEventListener('click', function(){
         projForm.style.visibility = 'visible';
     });
      
     projSubBtn.addEventListener('click', function(){
         appendProject();
-        projForm.style.visibility = 'hidden';
         reselectProjects();
+        projForm.style.visibility = 'hidden';
     })
 
     projExitBtn.addEventListener('click', function(){
@@ -63,11 +65,12 @@ function reselectProjects() {
     for(let i = 0; i < projItems.length; i++) {
         projItems[i].addEventListener('click', displayTodos)
        }
-    console.log(projItems);
+
 }
 //The functionality of appending elements to the project box.
 function appendProject() {
     //Selects the project box
+    idCounter++
     const box = document.querySelector('.project-box');
     //Creates a new div and h2 element to insert into the project box.
     const projItem = document.createElement('div');
@@ -76,20 +79,19 @@ function appendProject() {
     //Adds the class to the item for styling purposes and adds the title defined in the click event to 
     //projTitle. Also adds the data attribute to be the title, for later use in identifying buttons.
     projItem.classList.add('project-item');
-    projItem.setAttribute('data', projTitleText);
+    projItem.setAttribute('data', idCounter);
     projTitle.textContent = projTitleText;
    //appending
     projItem.appendChild(projTitle);
     box.appendChild(projItem);
     //Increment ID variable and store project in array
-    idCounter++
-    console.log(idCounter);
+    
     storeProj(idCounter, projTitleText);
 }
 //This function is needed so I can remove click events whenever a new project is added.
-function displayTodos(){
-    console.log('AHHHHHHHHHHHHH');
-    
+function displayTodos(e){
+    console.log(e.target);
+    projItems = document.querySelector('.project-item');
 }
 
 function storeProj(id, name){

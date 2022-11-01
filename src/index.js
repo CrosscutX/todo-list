@@ -46,6 +46,7 @@ let idCounter = 0;
 
     listSubBtn.addEventListener('click', function(){
         listForm.style.visibility = 'hidden';
+
     })
 
     listExitBtn.addEventListener('click', function(){
@@ -75,26 +76,29 @@ function appendProject() {
     //Creates a new div and h2 element to insert into the project box.
     const projItem = document.createElement('div');
     const projTitle = document.createElement('h2');
-    const projTitleText = document.querySelector('.project-input').value;
+    const projTitleText = document.querySelector('.project-input');
     //Adds the class to the item for styling purposes and adds the title defined in the click event to 
     //projTitle. Also adds the data attribute to be the title, for later use in identifying buttons.
     projItem.classList.add('project-item');
     projItem.setAttribute('data', idCounter);
     projTitle.setAttribute('data', idCounter);
-    projTitle.textContent = projTitleText;
+    projTitle.textContent = projTitleText.value;
    //appending
     projItem.appendChild(projTitle);
     box.appendChild(projItem);
-    //Increment ID variable and store project in array
-    
-    storeProj(idCounter, projTitleText);
+    storeProj(idCounter, projTitleText.value);
+    projTitleText.value = '';
+}
+
+function appendTodos() {
+
 }
 //This function is needed so I can remove click events whenever a new project is added.
 //The function itself should make the proper todo's visible.
 function displayTodos(e){
     const currentProject = e.target;
-    const todos = document.querySelectorAll('.todo-item')
-    currentID = currentProject.getAttribute('data')
+    const todos = document.querySelectorAll('.todo-item');
+    currentID = currentProject.getAttribute('data');
     
     todos.forEach(element => {
         if(element.getAttribute('data') !== currentID){

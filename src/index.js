@@ -80,6 +80,7 @@ function appendProject() {
     //projTitle. Also adds the data attribute to be the title, for later use in identifying buttons.
     projItem.classList.add('project-item');
     projItem.setAttribute('data', idCounter);
+    projTitle.setAttribute('data', idCounter);
     projTitle.textContent = projTitleText;
    //appending
     projItem.appendChild(projTitle);

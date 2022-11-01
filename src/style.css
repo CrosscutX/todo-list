@@ -123,6 +123,9 @@ main{
         align-items: flex-start;
         justify-content: flex-start;
         margin-left: 15px;
+        gap: 20px;
+        flex-wrap: wrap;
+        overflow: hidden;
     }
 
     /*todo elements that are added to the body of the list*/
@@ -134,7 +137,7 @@ main{
         background-color: #ba5312;
         border: 1px solid #A5DCE4;
         height: 85px;
-        width: 25%;
+        width: 31%;
         margin-bottom: 15px;
     }
     /*The project form that pops up when I click the new project button.

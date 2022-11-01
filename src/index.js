@@ -46,6 +46,7 @@ let idCounter = 0;
 
     listSubBtn.addEventListener('click', function(){
         listForm.style.visibility = 'hidden';
+        appendTodos();
 
     })
 
@@ -91,6 +92,18 @@ function appendProject() {
 }
 
 function appendTodos() {
+    const body = document.querySelector('.list-body');
+    const listTitle = document.querySelector('#list-title');
+    const listDescription = document.querySelector('#list-description');
+    const listDate = document.querySelector('#list-date');
+    const radioLow = document.querySelector('#list-priority-low');
+    const radioMedium = document.querySelector('#list-priority-medium');
+    const radioHigh = document.querySelector('#list-priority-high');
+
+    const newTodo = document.createElement('div');
+    newTodo.classList.add('todo-item');
+    newTodo.setAttribute('data', currentID);
+    body.appendChild(newTodo);
 
 }
 //This function is needed so I can remove click events whenever a new project is added.

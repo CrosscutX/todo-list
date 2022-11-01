@@ -76,7 +76,6 @@ main{
     margin-top: 10px;
     font-size: 2rem;
     display: flex;
-    justify-content: center;
     margin-bottom: 15px;
 }
 
@@ -103,12 +102,15 @@ main{
     height: 600px;
     background-color: #ba5312;
     border: 1px solid #A5DCE4;
+    min-height: 0;
+    overflow: auto;
 }
 
 .project-item{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     font-size: 0.6rem;
     margin-top: 20px;
     width: 80%;
@@ -116,6 +118,11 @@ main{
     background-color: #398557;
     border: 1px solid #A5DCE4;
 }
+
+    .list-column{
+        min-height: 0;
+        overflow: auto;
+    }
 
     /*Body to hold containers for todos*/
     .list-body{
@@ -125,7 +132,6 @@ main{
         margin-left: 15px;
         gap: 20px;
         flex-wrap: wrap;
-        overflow: hidden;
     }
 
     /*todo elements that are added to the body of the list*/

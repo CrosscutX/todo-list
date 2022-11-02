@@ -7,7 +7,7 @@ let projItems = document.getElementsByClassName('project-item');
 reselectProjects();
 //Array to hold all of my project objects
 let projArr = [];
-let todoArr = [];
+
 storeProj(0, 'Default Project');
 //Storing IDs to keep track of selected project.
 let currentID = 0;
@@ -16,7 +16,7 @@ let idCounter = 0;
 
  //Project button click handlers
 (function clickEvents() {
-    //Proj button click handlers
+    //Proj button click handlers-------------------------------------
     const projBtn = document.getElementById('projBtn');
     const projForm = document.querySelector('.project-form');
     const projSubBtn = document.querySelector('.project-submit');
@@ -35,7 +35,9 @@ let idCounter = 0;
     projExitBtn.addEventListener('click', function(){
         projForm.style.visibility = 'hidden';
     })
-    //List button click handler
+    //-----------------------------------------------------------
+    
+    //List button click handler----------------------------------
     const listBtn = document.getElementById('listBtn');
     const listForm = document.querySelector('.list-form')
     const listSubBtn = document.querySelector('.list-submit');
@@ -54,7 +56,8 @@ let idCounter = 0;
     listExitBtn.addEventListener('click', function(){
         listForm.style.visibility = 'hidden';
     })
-
+    //---------------------------------------------------------
+    
     
 })();
 
@@ -148,6 +151,9 @@ function storeProj(id, name){
     console.log(projArr);
 }
 
+function deleteTodos() {
+    const delBtns = document.querySelectorAll('')
+}
 
 
 

@@ -7,6 +7,7 @@ let projItems = document.getElementsByClassName('project-item');
 reselectProjects();
 //Array to hold all of my project objects
 let projArr = [];
+let todoArr = [];
 storeProj(0, 'Default Project');
 //Storing IDs to keep track of selected project.
 let currentID = 0;
@@ -112,12 +113,12 @@ function displayTodos(e){
     const currentProject = e.target;
     const todos = document.querySelectorAll('.todo-item');
     currentID = currentProject.getAttribute('data');
-    
+    //Display is changed here instead of visibility, as visibility will have an impact on formatting.
     todos.forEach(element => {
         if(element.getAttribute('data') !== currentID){
-            element.style.visibility = 'hidden';
+            element.style.display = 'none';
         } else{
-            element.style.visibility = 'visible'
+            element.style.display = 'flex'
         }
     });
     

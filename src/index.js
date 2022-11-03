@@ -51,8 +51,8 @@ let idCounter = 0;
     })
 
     listSubBtn.addEventListener('click', function(){
-        reselectTodos();
         appendTodos();
+        reselectTodos();
         listForm.style.visibility = 'hidden';
     })
 
@@ -60,7 +60,12 @@ let idCounter = 0;
         listForm.style.visibility = 'hidden';
     })
     //---------------------------------------------------------
+    const infoForm = document.querySelector('.todo-info')
+    const infoExit = document.querySelector('.info-exit')
     
+    infoExit.addEventListener('click', function(){
+        infoForm.style.visibility = 'hidden';
+    })
     
 })();
 
@@ -80,6 +85,15 @@ function reselectProjects() {
 
 function reselectTodos() {
     todoItems = document.getElementsByClassName('todo-item');
+
+    //remove event listener from all items to avoid stacking.
+    for(let i = 0; i < todoItems.length; i++) {
+        todoItems[i].removeEventListener('click', displayInfo);
+    }
+    //add event listeners back so they all buttons are clickable.
+    for(let i = 0; i < todoItems.length; i++) {
+        todoItems[i].addEventListener('click', displayInfo)
+       }
 
 }
 //The functionality of appending elements to the project box.
@@ -142,6 +156,7 @@ function appendTodos() {
 //The function itself should make the proper todo's visible.
 function displayTodos(e){
     const currentProject = e.target;
+    console.log(currentProject);
     const todos = document.querySelectorAll('.todo-item');
     currentID = currentProject.getAttribute('data');
     //Display is changed here instead of visibility, as visibility will have an impact on formatting.
@@ -155,10 +170,17 @@ function displayTodos(e){
     
 }
 
+function displayInfo(e) {
+    const currentTodo = e.target;
+    console.log(currentTodo);
+    const infoPanel = document.querySelector('.todo-info')
+    infoPanel.style.visibility = 'visible';
+
+}
+
 
 
 function storeProj(id, name){
-    console.log(id);
     const newProj = new Project(id, name);
     projArr.push(newProj);
     console.log(projArr);

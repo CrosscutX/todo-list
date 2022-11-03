@@ -4,7 +4,10 @@ import Project, {Todo} from './logic';
 import './style.css';
 
 let projItems = document.getElementsByClassName('project-item');
+let todoItems = document.getElementsByClassName('todo-item');
+
 reselectProjects();
+reselectTodos();
 //Array to hold all of my project objects
 let projArr = [];
 
@@ -48,9 +51,9 @@ let idCounter = 0;
     })
 
     listSubBtn.addEventListener('click', function(){
-        listForm.style.visibility = 'hidden';
+        reselectTodos();
         appendTodos();
-
+        listForm.style.visibility = 'hidden';
     })
 
     listExitBtn.addEventListener('click', function(){
@@ -72,6 +75,11 @@ function reselectProjects() {
     for(let i = 0; i < projItems.length; i++) {
         projItems[i].addEventListener('click', displayTodos)
        }
+
+}
+
+function reselectTodos() {
+    todoItems = document.getElementsByClassName('todo-item');
 
 }
 //The functionality of appending elements to the project box.
@@ -114,11 +122,15 @@ function appendTodos() {
     newDate.textContent = listDate.value;
     newDel.textContent = 'delete';
 
-    
+    //Set the classlists for formatting, and add the data/id attributes to the delete button and
+    //the todo card so that I can reference them later in the program to delete and pull up
+    //the proper info.
     newTodo.classList.add('todo-item');
     newDel.classList.add('material-symbols-outlined');
+    newDel.setAttribute('data', currentID);
+    newDel.setAttribute('id', newTitle.textContent);
     newTodo.setAttribute('data', currentID);
-
+    //append the new todos and info
     body.appendChild(newTodo);
     newTodo.appendChild(newTitle);
     newTodo.appendChild(newDate);
@@ -141,8 +153,9 @@ function displayTodos(e){
         }
     });
     
-    console.log(currentProject);
 }
+
+
 
 function storeProj(id, name){
     console.log(id);

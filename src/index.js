@@ -10,7 +10,7 @@ reselectProjects();
 reselectTodos();
 //Array to hold all of my project objects
 let projArr = [];
-
+let todoArr = [];
 storeProj(0, 'Default Project');
 //Storing IDs to keep track of selected project.
 let currentID = 0;
@@ -109,6 +109,7 @@ function appendProject() {
     //projTitle. Also adds the data attribute to be the title, for later use in identifying buttons.
     projItem.classList.add('project-item');
     projItem.setAttribute('data', idCounter);
+    
     projTitle.setAttribute('data', idCounter);
     projTitle.textContent = projTitleText.value;
    //appending
@@ -126,6 +127,16 @@ function appendTodos() {
     const radioLow = document.querySelector('#list-priority-low');
     const radioMedium = document.querySelector('#list-priority-medium');
     const radioHigh = document.querySelector('#list-priority-high');
+    let radioChoice = 'Low';
+    
+    if(radioLow.checked){
+        radioChoice = 'Low'
+    } else if(radioMedium.checked){
+        radioChoice = 'Medium';
+    } else if(radioHigh.checked){
+        radioChoice = 'High';
+    }
+    console.log(radioChoice);
 
     const newTodo = document.createElement('div');
     const newTitle = document.createElement('h2');
@@ -140,17 +151,41 @@ function appendTodos() {
     //the todo card so that I can reference them later in the program to delete and pull up
     //the proper info.
     newTodo.classList.add('todo-item');
+    newTodo.setAttribute('data', currentID);
+    newTodo.setAttribute('id', newTitle.textContent);
+
+    newTitle.setAttribute('data', currentID);
+    newTitle.setAttribute('id', newTitle.textContent);
+
+    newDate.setAttribute('data', currentID);
+    newDate.setAttribute('id', newTitle.textContent);
+    
     newDel.classList.add('material-symbols-outlined');
     newDel.setAttribute('data', currentID);
     newDel.setAttribute('id', newTitle.textContent);
-    newTodo.setAttribute('data', currentID);
+    
+    
     //append the new todos and info
     body.appendChild(newTodo);
     newTodo.appendChild(newTitle);
     newTodo.appendChild(newDate);
     newTodo.appendChild(newDel);
     //----------------------------------------------------------
+    
+    addTodoToArray(currentID, listTitle.value, listDescription.value, listDate.value, radioChoice);
+}
 
+function addTodoToArray(id,title,description,date,priority){
+    const newTodo = {
+        id: id,
+        title: title,
+        description: description,
+        date: date,
+        priority: priority
+    }
+
+    todoArr.push(newTodo);
+    console.log(todoArr);
 }
 //This function is needed so I can remove click events whenever a new project is added.
 //The function itself should make the proper todo's visible.

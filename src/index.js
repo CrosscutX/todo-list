@@ -1,6 +1,4 @@
 'use strict'
-import { data } from 'browserslist';
-import Project, {Todo} from './logic';
 import './style.css';
 
 let projItems = document.getElementsByClassName('project-item');
@@ -9,9 +7,8 @@ let todoItems = document.getElementsByClassName('todo-item');
 reselectProjects();
 reselectTodos();
 //Array to hold all of my project objects
-let projArr = [];
-let todoArr = [];
-storeProj(0, 'Default Project');
+let todoArr = [{id: 0, title: 'Title', description: 'lorum ipsum', date: '2022-12-31', priority: 'Low'}];
+
 //Storing IDs to keep track of selected project.
 let currentID = 0;
 let idCounter = 0;
@@ -115,7 +112,7 @@ function appendProject() {
    //appending
     projItem.appendChild(projTitle);
     box.appendChild(projItem);
-    storeProj(idCounter, projTitleText.value);
+    
     projTitleText.value = '';
 }
 
@@ -214,24 +211,32 @@ function displayTodos(e){
 }
 
 function displayInfo(e) {
-    const currentTodo = e.target;
-    console.log(currentTodo);
-    const infoPanel = document.querySelector('.todo-info')
+    const infoPanel = document.querySelector('.todo-info');
     infoPanel.style.visibility = 'visible';
+    const currentTodo = e.target;
+    const titleLbl = document.querySelector('.info-title');
+   
+    //loop through todo array and append the proper info to the info page.
+    for(let i = 0; i < todoArr.length; i++){
+        if(currentTodo.getAttribute('id') === todoArr[i].title && currentTodo.getAttribute('data') == todoArr[i].id){
+            const newTitle = document.createElement('p');
+            newTitle.textContent = todoArr[i].title;
+            titleLbl.appendChild(newTitle);
+            console.log('works');
+        }
+    }
+   
 
 }
 
 
-
-function storeProj(id, name){
-    const newProj = new Project(id, name);
-    projArr.push(newProj);
-    console.log(projArr);
-}
 
 function deleteTodos() {
     const delBtns = document.querySelectorAll('')
 }
 
+function clearInfo() {
+    const titleLbl = document.querySelector('info-title');
+}
 
 

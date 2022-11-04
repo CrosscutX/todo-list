@@ -62,6 +62,7 @@ let idCounter = 0;
     
     infoExit.addEventListener('click', function(){
         infoForm.style.visibility = 'hidden';
+        clearInfo();
     })
     
 })();
@@ -236,7 +237,11 @@ function deleteTodos() {
 }
 
 function clearInfo() {
-    const titleLbl = document.querySelector('info-title');
+    const titleLbl = document.querySelector('.info-title');
+    const title = document.querySelector('.info-title p')
+
+    
+    titleLbl.removeChild(title);
 }
 
 

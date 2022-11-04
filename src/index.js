@@ -136,7 +136,6 @@ function appendTodos() {
     } else if(radioHigh.checked){
         radioChoice = 'High';
     }
-    console.log(radioChoice);
 
     const newTodo = document.createElement('div');
     const newTitle = document.createElement('h2');
@@ -171,8 +170,17 @@ function appendTodos() {
     newTodo.appendChild(newDate);
     newTodo.appendChild(newDel);
     //----------------------------------------------------------
-    
+    //Add to array to compare later on
     addTodoToArray(currentID, listTitle.value, listDescription.value, listDate.value, radioChoice);
+
+    //After the input is added, clear the boxes
+    listTitle.value = '';
+    listDescription.value = 'Enter description here';
+    listDate.value = '';
+    radioLow.checked = false;
+    radioMedium.checked = false;
+    radioHigh.checked = false;
+
 }
 
 function addTodoToArray(id,title,description,date,priority){

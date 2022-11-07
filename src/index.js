@@ -18,12 +18,22 @@ let idCounter = 0;
 (function clickEvents() {
     //Proj button click handlers-------------------------------------
     const projBtn = document.getElementById('projBtn');
+    const projDel = document.querySelector('.project-delete');
     const projForm = document.querySelector('.project-form');
     const projSubBtn = document.querySelector('.project-submit');
     const projExitBtn = document.querySelector('.project-exit');
 
     projBtn.addEventListener('click', function(){
         projForm.style.visibility = 'visible';
+    });
+
+    projDel.addEventListener('click', function() {
+        console.log('delete');
+        for(let i = 0; i < projItems.length; i++) {
+            if(projItems[i].getAttribute('data') === currentID){
+                projItems.removeChild;
+            }
+        }
     });
      
     projSubBtn.addEventListener('click', function(){

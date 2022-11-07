@@ -104,7 +104,7 @@ h2, p, span {
     align-items: center;
     flex-direction: column;
     width: 80%;
-    height: 600px;
+    height: 550px;
     background-color: #ba5312;
     border: 1px solid #A5DCE4;
     min-height: 0;
@@ -122,6 +122,17 @@ h2, p, span {
     height: 50px;
     background-color: #398557;
     border: 1px solid #A5DCE4;
+}
+
+.project-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 150px;
+    height: 40px;
+    background-color: rgb(200, 36, 36);
+    border: 2px solid black;
 }
 
     .list-column{

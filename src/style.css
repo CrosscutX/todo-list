@@ -42,6 +42,10 @@ main{
     flex-direction: row;
     justify-content: space-around;
 }
+
+h2, p, span {
+    cursor: default;
+}
 .project-column{
     display: flex;
     flex-direction: column;

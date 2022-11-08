@@ -3,9 +3,13 @@ import './style.css';
 
 let projItems = document.getElementsByClassName('project-item');
 let todoItems = document.getElementsByClassName('todo-item');
+let todoDel = document.getElementsByClassName('material-symbols-outlined');
+let infoPanel = document.querySelector('.list-form')
 
 reselectProjects();
 reselectTodos();
+reselectDelete();
+
 //Array to hold all of my project objects
 let todoArr = [{id: 0, title: 'Title', description: 'lorum ipsum', date: '2022-12-31', priority: 'Low'}];
 
@@ -33,6 +37,7 @@ let idCounter = 0;
         for(let i = 0; i < projItems.length; i++) {
             if(projItems[i].getAttribute('data') === currentID){
                 projBox.removeChild(projItems[i]);
+
             }
         }
     });
@@ -61,11 +66,14 @@ let idCounter = 0;
     listSubBtn.addEventListener('click', function(){
         appendTodos();
         reselectTodos();
+        reselectDelete();
+
         listForm.style.visibility = 'hidden';
     })
 
     listExitBtn.addEventListener('click', function(){
         listForm.style.visibility = 'hidden';
+
     })
     //---------------------------------------------------------
     const infoForm = document.querySelector('.todo-info')
@@ -75,6 +83,7 @@ let idCounter = 0;
         infoForm.style.visibility = 'hidden';
         clearInfo();
     })
+
     
 })();
 
@@ -101,9 +110,21 @@ function reselectTodos() {
     }
     //add event listeners back so they all buttons are clickable.
     for(let i = 0; i < todoItems.length; i++) {
-        todoItems[i].addEventListener('click', displayInfo)
+        todoItems[i].addEventListener('click', displayInfo);
        }
 
+}
+
+function reselectDelete() {
+    todoDel = document.querySelectorAll('.material-symbols-outlined');
+
+    for(let i = 0; i < todoDel.length; i++) {
+        todoDel[i].removeEventListener('click', deleteTodos);
+    }
+
+    for(let i = 0; i < todoDel.length; i++) {
+        todoDel[i].addEventListener('click', deleteTodos);
+    }
 }
 //The functionality of appending elements to the project box.
 function appendProject() {
@@ -219,22 +240,40 @@ function displayTodos(e){
             element.style.display = 'flex'
         }
     });
-    
 }
 
 function displayInfo(e) {
-    const infoPanel = document.querySelector('.todo-info');
+    infoPanel = document.querySelector('.todo-info');
     infoPanel.style.visibility = 'visible';
     const currentTodo = e.target;
     const titleLbl = document.querySelector('.info-title');
+    const descriptionLbl = document.querySelector('.info-description');
+    const dateLbl = document.querySelector('.info-date');
+    const priorityLbl = document.querySelector('.info-priority');
    
     //loop through todo array and append the proper info to the info page.
     for(let i = 0; i < todoArr.length; i++){
         if(currentTodo.getAttribute('id') === todoArr[i].title && currentTodo.getAttribute('data') == todoArr[i].id){
             const newTitle = document.createElement('p');
+            const newDescription = document.createElement('p');
+            const newDate = document.createElement('p');
+            const newPriority = document.createElement('p');
+
             newTitle.textContent = todoArr[i].title;
+            newDescription.textContent = todoArr[i].description;
+            newDate.textContent = todoArr[i].date;
+            newPriority.textContent = todoArr[i].priority;
+           
             titleLbl.appendChild(newTitle);
-            console.log('works');
+            descriptionLbl.appendChild(newDescription);
+            dateLbl.appendChild(newDate);
+            priorityLbl.appendChild(newPriority)
+        }
+
+        if(e.target.getAttribute('class') === 'material-symbols-outlined') {
+            infoPanel.style.visibility = 'hidden';
+            //clears the info panel for cases when the delete button is selected
+            clearInfo();
         }
     }
    
@@ -243,16 +282,41 @@ function displayInfo(e) {
 
 
 
-function deleteTodos() {
-    const delBtns = document.querySelectorAll('')
+function deleteTodos(e) {
+    let currentDelete = e.target;
+    const listBody = document.querySelector('.list-body');
+    infoPanel = document.querySelector('.todo-info');
+
+    for(let i = 0; i < todoItems.length; i++) {
+        if(todoItems[i].getAttribute('data') === currentDelete.getAttribute('data') && todoItems[i].getAttribute('id') === currentDelete.getAttribute('id')){
+            console.log(todoItems[i].getAttribute('id'));
+            console.log(todoItems[i]);
+            console.log(listBody);
+            listBody.removeChild(todoItems[i]);
+        }
+
+    }
+
+
+  
 }
 
 function clearInfo() {
     const titleLbl = document.querySelector('.info-title');
-    const title = document.querySelector('.info-title p')
+    const descriptionLbl = document.querySelector('.info-description');
+    const dateLbl = document.querySelector('.info-date');
+    const priorityLbl = document.querySelector('.info-priority');
+
+    const title = document.querySelector('.info-title p');
+    const description = document.querySelector('.info-description p');
+    const date = document.querySelector('.info-date p');
+    const priority = document.querySelector('.info-priority p');
 
     
     titleLbl.removeChild(title);
+    descriptionLbl.removeChild(description);
+    dateLbl.removeChild(date);
+    priorityLbl.removeChild(priority);
 }
 
 

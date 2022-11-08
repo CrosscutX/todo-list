@@ -318,3 +318,7 @@ function clearInfo() {
     dateLbl.removeChild(date);
     priorityLbl.removeChild(priority);
 }
+
+function localStorage(){
+    
+}

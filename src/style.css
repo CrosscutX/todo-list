@@ -152,7 +152,10 @@ h2, p, span {
 
     /*todo elements that are added to the body of the list*/
     .todo-item{
-        padding-top: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         text-align: center;
         background-color: #ba5312;
         border: 1px solid #A5DCE4;

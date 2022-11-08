@@ -7,7 +7,7 @@ let todoDel = document.getElementsByClassName('material-symbols-outlined');
 let infoPanel = document.querySelector('.list-form')
 //Array to hold all of my project objects
 let todoArr = [{id: 0, title: 'Title', description: 'lorum ipsum', date: '2022-12-31', priority: 'Low'}];
-let tempTodoArr = []
+let tempTodoArr = [...todoArr]
 
 
 reselectProjects();
@@ -203,8 +203,9 @@ function appendTodos() {
     newTodo.appendChild(newDate);
     newTodo.appendChild(newDel);
     //----------------------------------------------------------
-    //Add to array to compare later on
+    //Add to array to compare later on, also make the temp array the current todoArr
     addTodoToArray(currentID, listTitle.value, listDescription.value, listDate.value, radioChoice);
+    tempTodoArr = [...todoArr];
 
     //After the input is added, clear the boxes
     listTitle.value = '';
@@ -226,13 +227,11 @@ function addTodoToArray(id,title,description,date,priority){
     }
 
     todoArr.push(newTodo);
-    console.log(todoArr);
 }
 //This function is needed so I can remove click events whenever a new project is added.
 //The function itself should make the proper todo's visible.
 function displayTodos(e){
     const currentProject = e.target;
-    console.log(currentProject);
     const todos = document.querySelectorAll('.todo-item');
     currentID = currentProject.getAttribute('data');
     //Display is changed here instead of visibility, as visibility will have an impact on formatting.
@@ -254,12 +253,12 @@ function displayInfo(e) {
     const dateLbl = document.querySelector('.info-date');
     const priorityLbl = document.querySelector('.info-priority');
 
+    console.log(tempTodoArr);
+
     //loop through todo array and append the proper info to the info page.
     for(let i = 0; i < tempTodoArr.length; i++){
         if(currentTodo.getAttribute('id') === tempTodoArr[i].title && currentTodo.getAttribute('data') == tempTodoArr[i].id) {
-            console.log('loop 1');
             if((e.target.getAttribute('class') === 'material-symbols-outlined')){
-                console.log('loop 2');
                 infoPanel.style.visibility = 'hidden';
 
             } else {
@@ -269,10 +268,10 @@ function displayInfo(e) {
                 const newDate = document.createElement('p');
                 const newPriority = document.createElement('p');
     
-                newTitle.textContent = todoArr[i].title;
-                newDescription.textContent = todoArr[i].description;
-                newDate.textContent = todoArr[i].date;
-                newPriority.textContent = todoArr[i].priority;
+                newTitle.textContent = tempTodoArr[i].title;
+                newDescription.textContent = tempTodoArr[i].description;
+                newDate.textContent = tempTodoArr[i].date;
+                newPriority.textContent = tempTodoArr[i].priority;
                
                 titleLbl.appendChild(newTitle);
                 descriptionLbl.appendChild(newDescription);
@@ -281,7 +280,6 @@ function displayInfo(e) {
             }
            
         }
-        tempTodoArr = [];
     }
    
 
@@ -291,20 +289,18 @@ function displayInfo(e) {
 
 
 function deleteTodos(e) {
+    tempTodoArr = [];
     let currentDelete = e.target;
     const listBody = document.querySelector('.list-body');
     infoPanel = document.querySelector('.todo-info');
-
     for(let i = 0; i < todoItems.length; i++) {
         if(todoItems[i].getAttribute('data') === currentDelete.getAttribute('data') && todoItems[i].getAttribute('id') === currentDelete.getAttribute('id')){
 
             for (let j = 0; j < todoArr.length; j++) {
                 if(todoArr[j].title === todoItems[i].getAttribute('id') && todoArr[j].id == todoItems[i].getAttribute('data')) {
                     console.log('item ' + todoArr[j].title + ' has been deleted');
-                    tempTodoArr.push(...todoArr);
-                    console.log(tempTodoArr);
+                    tempTodoArr = [...todoArr];
                     todoArr.splice(j, 1);
-                    console.log(todoArr);
                 }
             }
             listBody.removeChild(todoItems[i]);

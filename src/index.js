@@ -254,27 +254,27 @@ function displayInfo(e) {
     //loop through todo array and append the proper info to the info page.
     for(let i = 0; i < todoArr.length; i++){
         if(currentTodo.getAttribute('id') === todoArr[i].title && currentTodo.getAttribute('data') == todoArr[i].id){
-            const newTitle = document.createElement('p');
-            const newDescription = document.createElement('p');
-            const newDate = document.createElement('p');
-            const newPriority = document.createElement('p');
-
-            newTitle.textContent = todoArr[i].title;
-            newDescription.textContent = todoArr[i].description;
-            newDate.textContent = todoArr[i].date;
-            newPriority.textContent = todoArr[i].priority;
+            if((e.target.getAttribute('class') === 'material-symbols-outlined')){
+                infoPanel.style.visibility = 'hidden';
+            }else{
+                const newTitle = document.createElement('p');
+                const newDescription = document.createElement('p');
+                const newDate = document.createElement('p');
+                const newPriority = document.createElement('p');
+    
+                newTitle.textContent = todoArr[i].title;
+                newDescription.textContent = todoArr[i].description;
+                newDate.textContent = todoArr[i].date;
+                newPriority.textContent = todoArr[i].priority;
+               
+                titleLbl.appendChild(newTitle);
+                descriptionLbl.appendChild(newDescription);
+                dateLbl.appendChild(newDate);
+                priorityLbl.appendChild(newPriority)
+            }
            
-            titleLbl.appendChild(newTitle);
-            descriptionLbl.appendChild(newDescription);
-            dateLbl.appendChild(newDate);
-            priorityLbl.appendChild(newPriority)
         }
 
-        if(e.target.getAttribute('class') === 'material-symbols-outlined') {
-            infoPanel.style.visibility = 'hidden';
-            //clears the info panel for cases when the delete button is selected
-            clearInfo();
-        }
     }
    
 
@@ -312,7 +312,6 @@ function clearInfo() {
     const date = document.querySelector('.info-date p');
     const priority = document.querySelector('.info-priority p');
 
-    
     titleLbl.removeChild(title);
     descriptionLbl.removeChild(description);
     dateLbl.removeChild(date);

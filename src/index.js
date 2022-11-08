@@ -5,13 +5,16 @@ let projItems = document.getElementsByClassName('project-item');
 let todoItems = document.getElementsByClassName('todo-item');
 let todoDel = document.getElementsByClassName('material-symbols-outlined');
 let infoPanel = document.querySelector('.list-form')
+//Array to hold all of my project objects
+let todoArr = [{id: 0, title: 'Title', description: 'lorum ipsum', date: '2022-12-31', priority: 'Low'}];
+let tempTodoArr = []
+
 
 reselectProjects();
 reselectTodos();
 reselectDelete();
 
-//Array to hold all of my project objects
-let todoArr = [{id: 0, title: 'Title', description: 'lorum ipsum', date: '2022-12-31', priority: 'Low'}];
+
 
 //Storing IDs to keep track of selected project.
 let currentID = 0;
@@ -250,13 +253,17 @@ function displayInfo(e) {
     const descriptionLbl = document.querySelector('.info-description');
     const dateLbl = document.querySelector('.info-date');
     const priorityLbl = document.querySelector('.info-priority');
-   
+
     //loop through todo array and append the proper info to the info page.
-    for(let i = 0; i < todoArr.length; i++){
-        if(currentTodo.getAttribute('id') === todoArr[i].title && currentTodo.getAttribute('data') == todoArr[i].id){
+    for(let i = 0; i < tempTodoArr.length; i++){
+        if(currentTodo.getAttribute('id') === tempTodoArr[i].title && currentTodo.getAttribute('data') == tempTodoArr[i].id) {
+            console.log('loop 1');
             if((e.target.getAttribute('class') === 'material-symbols-outlined')){
+                console.log('loop 2');
                 infoPanel.style.visibility = 'hidden';
-            }else{
+
+            } else {
+
                 const newTitle = document.createElement('p');
                 const newDescription = document.createElement('p');
                 const newDate = document.createElement('p');
@@ -274,11 +281,12 @@ function displayInfo(e) {
             }
            
         }
-
+        tempTodoArr = [];
     }
    
 
 }
+
 
 
 
@@ -289,10 +297,18 @@ function deleteTodos(e) {
 
     for(let i = 0; i < todoItems.length; i++) {
         if(todoItems[i].getAttribute('data') === currentDelete.getAttribute('data') && todoItems[i].getAttribute('id') === currentDelete.getAttribute('id')){
-            console.log(todoItems[i].getAttribute('id'));
-            console.log(todoItems[i]);
-            console.log(listBody);
+
+            for (let j = 0; j < todoArr.length; j++) {
+                if(todoArr[j].title === todoItems[i].getAttribute('id') && todoArr[j].id == todoItems[i].getAttribute('data')) {
+                    console.log('item ' + todoArr[j].title + ' has been deleted');
+                    tempTodoArr.push(...todoArr);
+                    console.log(tempTodoArr);
+                    todoArr.splice(j, 1);
+                    console.log(todoArr);
+                }
+            }
             listBody.removeChild(todoItems[i]);
+
         }
 
     }
@@ -312,10 +328,24 @@ function clearInfo() {
     const date = document.querySelector('.info-date p');
     const priority = document.querySelector('.info-priority p');
 
-    titleLbl.removeChild(title);
-    descriptionLbl.removeChild(description);
-    dateLbl.removeChild(date);
-    priorityLbl.removeChild(priority);
+
+    if(title != null) {
+        titleLbl.removeChild(title);
+    }
+
+    if(description != null) {
+        descriptionLbl.removeChild(description);
+    }
+
+    if(date != null) {
+        dateLbl.removeChild(date);
+    }
+
+    if(priority != null) {
+        priorityLbl.removeChild(priority);
+    }
+
+
 }
 
 function localStorage(){

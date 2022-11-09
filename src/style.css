@@ -260,15 +260,16 @@ h2, p, span {
 .info-row {
     margin-top: 10px;
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    overflow-wrap: break-all;
+    overflow-wrap: break-word;
 }
 
 .info-row p {
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    overflow-wrap: break-word;
 }
 
 

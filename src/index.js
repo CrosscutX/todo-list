@@ -1,6 +1,6 @@
 'use strict'
 import './style.css';
-
+localStorageDisplay();
 let projItems = document.getElementsByClassName('project-item');
 let todoItems = document.getElementsByClassName('todo-item');
 let todoDel = document.getElementsByClassName('material-symbols-outlined');
@@ -43,11 +43,13 @@ let idCounter = 0;
 
             }
         }
+        localStorageProject();
     });
      
     projSubBtn.addEventListener('click', function(){
         appendProject();
         reselectProjects();
+        localStorageProject();
         projForm.style.visibility = 'hidden';
     })
 
@@ -70,6 +72,7 @@ let idCounter = 0;
         appendTodos();
         reselectTodos();
         reselectDelete();
+        localStorageTodo();
 
         listForm.style.visibility = 'hidden';
     })
@@ -253,7 +256,6 @@ function displayInfo(e) {
     const dateLbl = document.querySelector('.info-date');
     const priorityLbl = document.querySelector('.info-priority');
 
-    console.log(tempTodoArr);
 
     //loop through todo array and append the proper info to the info page.
     for(let i = 0; i < tempTodoArr.length; i++){
@@ -304,7 +306,7 @@ function deleteTodos(e) {
                 }
             }
             listBody.removeChild(todoItems[i]);
-
+            localStorageTodo();
         }
 
     }
@@ -344,6 +346,47 @@ function clearInfo() {
 
 }
 
-function localStorage(){
-    
+let localProjArr = [];
+let localTodoArr = [];
+
+function localStorageProject() {
+    localProjArr = [];
+
+    for(let i = 0; i < projItems.length; i++) {
+        const newProject = {
+            id: projItems[i].getAttribute('data'),
+            title: projItems[i].outerText,
+        }
+
+        localProjArr.push(newProject);
+    }
+
+    localStorage.setItem('project', JSON.stringify(localProjArr));
+}
+
+
+function localStorageTodo() {
+    localTodoArr = [];
+
+    for(let i = 0; i < todoArr.length; i++) {
+        const newTodo = {
+            id: todoArr[i].id,
+            title: todoArr[i].title,
+            description: todoArr[i].description,
+            date: todoArr[i].date,
+            priority: todoArr[i].priority,
+        }
+        localTodoArr.push(newTodo);
+    }
+    console.log(localTodoArr);
+    localStorage.setItem('todo', JSON.stringify(localTodoArr));
+}
+
+function localStorageDisplay() {
+    let projectInfo = JSON.parse(localStorage.getItem('project'));
+    let todoInfo = JSON.parse(localStorage.getItem('todo'));
+
+
+    console.log(projectInfo);
+    console.log(todoInfo);
 }

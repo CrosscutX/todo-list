@@ -1,24 +1,27 @@
 'use strict'
 import './style.css';
-localStorageDisplay();
+
 let projItems = document.getElementsByClassName('project-item');
 let todoItems = document.getElementsByClassName('todo-item');
 let todoDel = document.getElementsByClassName('material-symbols-outlined');
 let infoPanel = document.querySelector('.list-form')
 //Array to hold all of my project objects
-let todoArr = [{id: 0, title: 'Title', description: 'lorum ipsum', date: '2022-12-31', priority: 'Low'}];
+let todoArr = [];
 let tempTodoArr = [...todoArr]
+//Storing IDs to keep track of selected project.
+let currentID = 1;
+let idCounter = 0;
 
-
+localStorageDisplay();
+console.log(todoArr);
+console.log(idCounter);
 reselectProjects();
 reselectTodos();
 reselectDelete();
 
 
 
-//Storing IDs to keep track of selected project.
-let currentID = 0;
-let idCounter = 0;
+
 
 
  //Project button click handlers
@@ -360,7 +363,9 @@ function localStorageProject() {
 
         localProjArr.push(newProject);
     }
+    console.log(idCounter);
 
+    localStorage.setItem('counter', JSON.stringify(idCounter));
     localStorage.setItem('project', JSON.stringify(localProjArr));
 }
 
@@ -383,10 +388,61 @@ function localStorageTodo() {
 }
 
 function localStorageDisplay() {
+    const projectContainer = document.querySelector('.project-box');
+    const todoContainer = document.querySelector('.list-body');
+
     let projectInfo = JSON.parse(localStorage.getItem('project'));
     let todoInfo = JSON.parse(localStorage.getItem('todo'));
+    idCounter = JSON.parse(localStorage.getItem('counter'));
 
+    if(projectInfo) {
+        for(let i = 0; i < projectInfo.length; i++) {
+            const projectDiv = document.createElement('div');
+            const projectTitle = document.createElement('h2');
 
-    console.log(projectInfo);
-    console.log(todoInfo);
+            projectDiv.setAttribute('class', 'project-item');
+            projectDiv.setAttribute('data', projectInfo[i].id);
+
+            projectTitle.setAttribute('data', projectInfo[i].id);
+            projectTitle.textContent = projectInfo[i].title;
+            
+            projectContainer.appendChild(projectDiv);
+            projectDiv.appendChild(projectTitle);
+        }
+    }
+
+    if(todoInfo) {
+            todoArr = [...todoInfo];
+            tempTodoArr = [...todoInfo];
+            for(let i = 0; i < todoInfo.length; i++) {
+                const todoDiv = document.createElement('div');
+                const todoTitle = document.createElement('h2');
+                const todoDate = document.createElement('p');
+                const todoDel = document.createElement('span');
+
+                todoDiv.setAttribute('class', 'todo-item');
+                todoDiv.setAttribute('data', todoInfo[i].id);
+                todoDiv.setAttribute('id', todoInfo[i].title);
+
+                todoTitle.textContent = todoInfo[i].title;
+                todoTitle.setAttribute('data', todoInfo[i].id);
+                todoTitle.setAttribute('id', todoInfo[i].title);
+
+                todoDate.textContent = todoInfo[i].date;
+                todoDate.setAttribute('data', todoInfo[i].id);
+                todoDate.setAttribute('id', todoInfo[i].title);
+
+                todoDel.textContent = 'delete';
+                todoDel.setAttribute('class', 'material-symbols-outlined');
+                todoDel.setAttribute('data', todoInfo[i].id);
+                todoDel.setAttribute('id', todoInfo[i].title);
+
+                todoContainer.appendChild(todoDiv);
+                todoDiv.appendChild(todoTitle);
+                todoDiv.appendChild(todoDate);
+                todoDiv.appendChild(todoDel);
+
+            }
+    }
+    
 }

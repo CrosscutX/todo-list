@@ -13,8 +13,6 @@ let currentID = 1;
 let idCounter = 0;
 
 localStorageDisplay();
-console.log(todoArr);
-console.log(idCounter);
 reselectProjects();
 reselectTodos();
 reselectDelete();
@@ -39,7 +37,6 @@ reselectDelete();
     });
 
     projDel.addEventListener('click', function() {
-        console.log('delete');
         for(let i = 0; i < projItems.length; i++) {
             if(projItems[i].getAttribute('data') === currentID){
                 projBox.removeChild(projItems[i]);
@@ -363,7 +360,6 @@ function localStorageProject() {
 
         localProjArr.push(newProject);
     }
-    console.log(idCounter);
 
     localStorage.setItem('counter', JSON.stringify(idCounter));
     localStorage.setItem('project', JSON.stringify(localProjArr));
@@ -383,7 +379,6 @@ function localStorageTodo() {
         }
         localTodoArr.push(newTodo);
     }
-    console.log(localTodoArr);
     localStorage.setItem('todo', JSON.stringify(localTodoArr));
 }
 
